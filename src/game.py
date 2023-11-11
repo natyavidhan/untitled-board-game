@@ -1,10 +1,28 @@
+from yaml import load, dump
+
 class Demon:
     name: str
     health: int
 
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+
+    def serialize(self):
+        return {
+            "name": self.name,
+            "health": self.health
+        }
+
 
 class Item:
     name: str
+
+    def __init__(self, name):
+        self.name = name
+
+    def serialize(self):
+        return self.name
 
 
 class Player:
@@ -24,6 +42,16 @@ class Player:
         self.position = position
         self.gold = gold
 
+    def serialize(self):
+        serializer = lambda x: x.serialize()
+        return {
+            "name": self.name,
+            "items": map(serializer, self.items),
+            "position": self.position,
+            "health": self.health,
+            "gold": self.gold
+        }
+
     def give_item(self, item: Item):
         self.items.append(item)
 
@@ -40,11 +68,30 @@ class Game:
     player_name_to_index: dict[str, int]
     demons: list[Demon]
 
-    def __init__(self, player_names: list[str]):
+    items: list[Item]
+
+    def __init__(self, items: list[Item], player_names: list[str]):
         self.players = []
+        self.items = items
         self.player_name_to_index = {}
         self.initialize_players(player_names)
         self.assign_grid(len(player_names))
+
+    def from_file(file_name: str):
+        pass
+
+    def to_file(self, file_name: str):
+        with open(file_name, 'w') as file:
+            dump(self.serialize(), file)
+
+    def serialize(self):
+        serializer = lambda x: x.serialize()
+        return {
+            "grid": self.grid,
+            "players": map(serializer, self.players),
+            "demons": map(serializer, self.demons),
+            "items": map(serializer, self.items)
+        }
 
     def initialize_players(self, player_names: list[str]):
         self.players = list(map(
