@@ -1,3 +1,53 @@
+demons:
+- health: 100
+  name: Charlie
+- health: 92
+  name: John
+- health: 80
+  name: Hydra
+- health: 50
+  name: Goblin
+items:
+- description: Used to teleport to any square
+  name: Teleport
+- description: Spin the lucky wheel
+  name: Luck
+- description: Gain 5 power points
+  name: Fireball I
+- description: Gain 10 power points
+  name: Fireball II
+- description: Gain 20 power points
+  name: Fireball III
 players:
-  - name: "Player_1"
-    
+- gold: 10
+  health: 100
+  items:
+  - description: Used to teleport to any square
+    name: Teleport
+  - description: Used to teleport to any square
+    name: Teleport
+  - description: Spin the lucky wheel
+    name: Luck
+  name: Comet
+  position: 0
+  power: 10
+- gold: 10
+  health: 100
+  items:
+  - description: Spin the lucky wheel
+    name: Luck
+  - description: Gain 5 power points
+    name: Fireball I
+  - description: Gain 5 power points
+    name: Fireball I
+  name: SG
+  position: 0
+  power: 10
+- gold: 10
+  health: 100
+  items:
+  - description: Gain 20 power points
+    name: Fireball III
+  name: Marcel
+  position: 0
+  power: 10
